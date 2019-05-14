@@ -4,7 +4,7 @@
 uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
 
 [[BinaryBuilder]]
-git-tree-sha1 = "72de6ed17ff72927500ab33b21f2e65aa2b90d66"
+git-tree-sha1 = "00c47be1691b05cfcdb9fcc2d5e57f5e1c424fb8"
 repo-rev = "sf/pkg_bp_merge"
 repo-url = "https://github.com/JuliaPackaging/BinaryBuilder.jl.git"
 uuid = "12aac903-9f7c-5d81-afc2-d9565ea332ae"

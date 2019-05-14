@@ -19,8 +19,8 @@ make install
 platforms = expand_gfortran_versions(supported_platforms())
 
 # The products that we will ensure are always built
-products(prefix) = [
-    ExecutableProduct(prefix, "hello_fortran", :hello_fortran)
+products = [
+    ExecutableProduct("hello_fortran", :hello_fortran)
 ]
 
 # Dependencies that must be installed before this package can be built
