@@ -1,11 +1,11 @@
 using BinaryBuilder
 
 name = "fortran_expansion"
-version = v"1.2.3"
+version = v"0.1.3"
 
 # Collection of sources required to build libffi
 sources = [
-    "./bundled",
+    joinpath(@__DIR__, "./bundled"),
 ]
 
 # Bash recipe for building across all platforms

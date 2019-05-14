@@ -1,0 +1,3 @@
+[submodule "Pkg.jl"]
+	path = Pkg.jl
+	url = https://github.com/JuliaLang/Pkg.jl

@@ -5,7 +5,7 @@ version = v"1.2.3"
 
 # Collection of sources required to build libffi
 sources = [
-    "./bundled",
+    joinpath(@__DIR__, "./bundled"),
 ]
 
 # Bash recipe for building across all platforms
@@ -19,8 +19,9 @@ make install
 platforms = supported_platforms()
 
 # The products that we will ensure are always built
-products(prefix) = [
-    LibraryProduct(prefix, "libc_simple", :libc_simple)
+products = [
+    LibraryProduct("libc_simple", :libc_simple),
+    ExecutableProduct("c_simple", :c_simple),
 ]
 
 # Dependencies that must be installed before this package can be built

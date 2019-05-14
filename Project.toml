@@ -1,0 +1,4 @@
+[deps]
+BinaryBuilder = "12aac903-9f7c-5d81-afc2-d9565ea332ae"
+Pkg = "44cfe95a-1eb2-52ea-b672-e2afdf69b78e"
+Registrator = "4418983a-e44d-11e8-3aec-9789530b3b3e"

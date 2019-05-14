@@ -1,0 +1,4 @@
+build/
+products/
+.depot/
+*.swp

@@ -1,11 +1,11 @@
 using BinaryBuilder
 
 name = "cxx_string"
-version = v"1.2.3"
+version = v"1.2.4"
 
 # Collection of sources required to build libffi
 sources = [
-    "./bundled",
+    joinpath(@__DIR__, "./bundled"),
 ]
 
 # Bash recipe for building across all platforms
@@ -16,11 +16,11 @@ make install
 
 # These are the platforms we will build for by default, unless further
 # platforms are passed in on the command line
-platforms = expand_cxx_versions(supported_platforms())
+platforms = supported_platforms()
 
 # The products that we will ensure are always built
-products(prefix) = [
-    LibraryProduct(prefix, "libcxx_string", :libcxx_string)
+products = [
+    LibraryProduct("libcxx_string", :libcxx_string)
 ]
 
 # Dependencies that must be installed before this package can be built
