@@ -4,7 +4,7 @@
 uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
 
 [[BinaryBuilder]]
-git-tree-sha1 = "00c47be1691b05cfcdb9fcc2d5e57f5e1c424fb8"
+git-tree-sha1 = "3b62b1841184da1a45030691b1cdb65ae8b803dc"
 repo-rev = "sf/pkg_bp_merge"
 repo-url = "https://github.com/JuliaPackaging/BinaryBuilder.jl.git"
 uuid = "12aac903-9f7c-5d81-afc2-d9565ea332ae"
@@ -175,7 +175,7 @@ version = "1.1.0"
 deps = ["Dates", "LibGit2", "Markdown", "Printf", "REPL", "Random", "SHA", "UUIDs"]
 uuid = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
 [[Pkg]]
-deps = ["Dates", "LibGit2", "Libdl", "Markdown", "Printf", "REPL", "Random", "SHA", "UUIDs"]
+deps = ["Dates", "LibGit2", "Libdl", "Markdown", "Printf", "REPL", "Random", "SHA", "Test", "UUIDs"]
 path = "Pkg.jl"
 uuid = "44cfe95a-1eb2-52ea-b672-e2afdf69b78e"
 version = "1.1.0"

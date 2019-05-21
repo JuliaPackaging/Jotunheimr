@@ -17,12 +17,17 @@ fi
 
 # We need the `master` branch of our registry to contain a machine-editable version
 # of Registry.toml, so we manually set that up by round-tripping it through TOML:
-julia --project=${DIR} -e "using Registrator; Registrator.get_registry(Registrator.DEFAULT_REGISTRY; registries_root=\"${DIR}/.depot\", force_reset=false)"
+julia --color=yes --project=${DIR} -e "using Registrator; Registrator.get_registry(Registrator.DEFAULT_REGISTRY; registries_root=\"${DIR}/.depot\", force_reset=false)"
 (
     cd ${DIR}/.depot/registries/General && \
-    julia --project=${DIR} -e "using Registrator; f=\"Registry.toml\"; Registrator.write_toml(f, Registrator.TOML.parsefile(f))" && \
+    julia --color=yes --project=${DIR} -e "using Registrator; f=\"Registry.toml\"; Registrator.write_toml(f, Registrator.TOML.parsefile(f))" && \
     git commit -a -m "Make Registry.toml machine-mergable"
 )
+
+# Now that we have our own depot, use that from here on out; also instantiate things here.
+export JULIA_DEPOT_PATH=${DIR}/.depot
+echo "Instantiating Julia environment"
+julia --color=yes --project=${DIR} -e "import Pkg; Pkg.instantiate()"
 
 # Get the current platform as the build target unless if `--all` is supplied
 if [[ "$*" != *--all* ]]; then
@@ -44,11 +49,11 @@ else
 fi
 
 # Build everything
-for PROJ in c_simple cxx_string_expansion fortran_expansion; do
+for PROJ in c_simple; do #cxx_string_expansion fortran_expansion; do
     ( \
         echo "Building ${PROJ}..." && \
         cd ${DIR}/${PROJ} && \
-        julia --project="${DIR}" --color=yes build_tarballs.jl --verbose --debug --deploy --register="${DIR}/.depot" ${target} ; \
+        julia --color=yes --project="${DIR}" build_tarballs.jl --verbose --debug --deploy --register="${DIR}/.depot" ${target} ; \
     )
 done
 
@@ -63,5 +68,14 @@ echo "Merging all 'register' branches into a single registry branch..."
         git merge --no-edit -q ${b}; \
     done; \
 )
+
+# Once we've merged those together, run our dependent build(s)
+#for PROJ in c_dependent; do
+#    ( \
+#        echo "Building ${PROJ}..." && \
+#        cd ${DIR}/${PROJ} && \
+#        julia --color=yes --project="${DIR}" build_tarballs.jl --verbose --debug --deploy --register="${DIR}/.depot" ${target} ; \
+#    )
+#done
 
 echo "Building, registration and deployment finished, run demos!"
