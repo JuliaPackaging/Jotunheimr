@@ -11,5 +11,9 @@ echo "Installing into temporary Julia project ${TEMP_PROJECT}"
 ${JULIA} --color=yes --project=${TEMP_PROJECT} -e "import Pkg; Pkg.add(\"c_dependent_jll\")"
 
 # Load `c_dependent_jll` and show that `ccall()` 'just works' right out of the box, as well as `run()`
+echo "Testing ccall:"
 ${JULIA} --color=yes --project=${TEMP_PROJECT} -e "using c_dependent_jll; @show ccall((:my_mult, libdependent), Cint, (Cint, Cint), 2, 3)"
+echo "Testing run()'ing deppy in function-call mode:"
+${JULIA} --color=yes --project=${TEMP_PROJECT} -e "using c_dependent_jll; deppy(path -> run(\`\$path 2 3\`))"
+echo "Testing run()'ing deppy in binary-exec mode:"
 ${JULIA} --color=yes --project=${TEMP_PROJECT} -e "using c_dependent_jll; deppy(path -> run(\`\$path --exec 2 3\`))"
