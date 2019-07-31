@@ -1,6 +1,7 @@
 all: deppy libdependent.$(dlext)
 
 CPPFLAGS += -fPIC -std=gnu99
+LDFLAGS += -L$(prefix)/lib -L$(prefix)/bin
 
 libdependent.$(dlext): libdependent.c
 	$(CC) $(CPPFLAGS) $(CFLAGS) $< -shared -o $@ $(LDFLAGS) -lc_simple
